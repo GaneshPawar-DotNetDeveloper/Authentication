@@ -36,6 +36,7 @@ namespace MVCAuthentication.Controllers
         }
 
         // GET: Products/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -44,12 +45,14 @@ namespace MVCAuthentication.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductId,Name,price,AddedDate")] Product product)
         {
             if (ModelState.IsValid)
             {
+                product.AddedDate= DateTime.Now;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
