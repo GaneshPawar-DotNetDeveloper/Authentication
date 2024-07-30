@@ -23,7 +23,10 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @if (Model != null && Model.Count() > 0)
+    {
+foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -35,11 +38,19 @@
             @Html.DisplayFor(modelItem => item.AddedDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
         </td>
     </tr>
-}
+}}
+else
+            {
+        <tr>
+            <td colspan="4">
+                No product Available
+            </td>
+        </tr>
+            }
 
 </table>
